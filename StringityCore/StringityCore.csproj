@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<OutputType>Library</OutputType>
+	<Description>StringityCore Nuget for Common string utilities</Description>
+	<Copyright>MIT</Copyright>
+	<PackageProjectUrl>https://github.com/Stringity/StringityCore</PackageProjectUrl>
+	<RepositoryUrl>https://github.com/Stringity/StringityCore</RepositoryUrl>
+	<Version>1.0.0</Version>
+	<Company>Stringity</Company>
+	<Authors>Mathis1337</Authors>
+	<PackAsTool>False</PackAsTool>
+	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	<Title>StringityCore</Title>
+	<RepositoryType>git</RepositoryType>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<PackageTags>stringitycore;commontools;cutilities;cutils</PackageTags>
+	<ApplicationIcon>Assets\Icons\strlogoicon.ico</ApplicationIcon>
+	<PackageIcon>strlogo.png</PackageIcon>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<GenerateDocumentationFile>True</GenerateDocumentationFile>
+	<EnableNETAnalyzers>True</EnableNETAnalyzers>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Assets\Icons\strlogoicon.ico" />
+		<Content Include="Assets\Images\strlogo.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+</Project>
