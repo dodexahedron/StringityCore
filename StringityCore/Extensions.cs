@@ -81,7 +81,7 @@ public static class Extensions
     // Morse Decode
     public static string FromMorseCode (this string input)
     {
-        return string.Concat (input.Split (' ').Where (static m => MorseDecode.ContainsKey (m)).Select (static m => MorseDecode [m]));
+        return string.Concat (input.Split (' ').Where (static m => _morseDecode.ContainsKey (m)).Select (static m => _morseDecode [m]));
     }
 
     // Get String Length
@@ -186,7 +186,7 @@ public static class Extensions
         // Fisher-Yates shuffle algorithm
         for (int i = n - 1; i > 0; i--)
         {
-            int j = rng.Next (i + 1);
+            int j = _rng.Next (i + 1);
 
             // Swap array[i] with array[j]
             (array [i], array [j]) = (array [j], array [i]);
@@ -334,7 +334,7 @@ public static class Extensions
 
     public static string ToMorseCode (this string input)
     {
-        return string.Join (" ", input.ToUpper ().Where (static c => MorseAlphabet.ContainsKey (c)).Select (static c => MorseAlphabet [c]));
+        return string.Join (" ", input.ToUpper ().Where (static c => _morseAlphabet.ContainsKey (c)).Select (static c => _morseAlphabet [c]));
     }
 
     public static string ToPascalCase (this string input)
@@ -473,11 +473,11 @@ public static class Extensions
 
     #region Private tools
 
-    private static readonly Random rng = new ();
+    private static readonly Random _rng = new ();
 
     private static string BytesToHex (byte [] input) => Convert.ToHexString (input).ToLower ();
 
-    private static readonly Dictionary<char, string> MorseAlphabet = new ()
+    private static readonly Dictionary<char, string> _morseAlphabet = new ()
                                                                      {
                                                                          { 'A', ".-" }, { 'B', "-..." }, { 'C', "-.-." }, { 'D', "-.." },
                                                                          { 'E', "." },
@@ -496,7 +496,7 @@ public static class Extensions
                                                                          { '0', "-----" }
                                                                      };
 
-    private static readonly Dictionary<string, char> MorseDecode = MorseAlphabet.ToDictionary (static kvp => kvp.Value, static kvp => kvp.Key);
+    private static readonly Dictionary<string, char> _morseDecode = _morseAlphabet.ToDictionary (static kvp => kvp.Value, static kvp => kvp.Key);
 
     #endregion
 }
