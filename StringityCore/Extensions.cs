@@ -57,12 +57,12 @@ public static class Extensions
 
     public static string ToCompress(this string input)
     {
-        var bytes = Encoding.Unicode.GetBytes(input);
+        byte[] bytes = Encoding.Unicode.GetBytes(input);
 
-        using (var msi = new MemoryStream(bytes))
-        using (var mso = new MemoryStream())
+        using (MemoryStream msi = new (bytes))
+        using (MemoryStream mso = new ())
         {
-            using (var gs = new GZipStream(mso, CompressionMode.Compress))
+            using (GZipStream gs = new (mso, CompressionMode.Compress))
             {
                 msi.CopyTo(gs);
             }
@@ -73,12 +73,12 @@ public static class Extensions
 
     public static string ToDecompress(this string input)
     {
-        var bytes = Convert.FromBase64String(input);
+        byte[] bytes = Convert.FromBase64String(input);
 
-        using (var msi = new MemoryStream(bytes))
-        using (var mso = new MemoryStream())
+        using (MemoryStream msi = new (bytes))
+        using (MemoryStream mso = new ())
         {
-            using (var gs = new GZipStream(msi, CompressionMode.Decompress))
+            using (GZipStream gs = new (msi, CompressionMode.Decompress))
             {
                 gs.CopyTo(mso);
             }
@@ -114,7 +114,7 @@ public static class Extensions
         if (string.IsNullOrWhiteSpace(input))
             return input;
 
-        var words = System.Text.RegularExpressions.Regex.Split(input, @"[\s_\-]+");
+        string[] words = System.Text.RegularExpressions.Regex.Split(input, @"[\s_\-]+");
 
         if (words.Length == 0)
             return input;
@@ -132,7 +132,7 @@ public static class Extensions
         if (string.IsNullOrWhiteSpace(input))
             return input;
 
-        var words = System.Text.RegularExpressions.Regex.Split(input, @"[\s_\-]+");
+        string[] words = System.Text.RegularExpressions.Regex.Split(input, @"[\s_\-]+");
 
         if (words.Length == 0)
             return input;
@@ -150,7 +150,7 @@ public static class Extensions
         if (string.IsNullOrWhiteSpace(input))
             return input;
 
-        var words = System.Text.RegularExpressions.Regex.Split(input, @"[\s_\-]+");
+        string[] words = System.Text.RegularExpressions.Regex.Split(input, @"[\s_\-]+");
 
         if (words.Length == 0)
             return input;
@@ -253,7 +253,7 @@ public static class Extensions
     // Hex Decode
     public static string FromHex(this string input)
     {
-        var chars = new List<byte>();
+        List<byte> chars = new ();
 
         for (int i = 0; i < input.Length; i += 2)
         {
@@ -332,9 +332,9 @@ public static class Extensions
 
     public static string FromBinary(this string input)
     {
-        var bytes = input.Split(' ')
-                          .Select(b => Convert.ToByte(b, 2))
-                          .ToArray();
+        byte[] bytes = input.Split(' ')
+                            .Select(b => Convert.ToByte(b, 2))
+                            .ToArray();
 
         return Encoding.ASCII.GetString(bytes);
     }
@@ -423,7 +423,7 @@ public static class Extensions
     // Find Most Frequent Word
     public static string MostFrequentWord(this string input)
     {
-        var words = input.Split(new[] { ' ', '\t', '\n', '\r', '.', ',', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
+        string[] words = input.Split(new[] { ' ', '\t', '\n', '\r', '.', ',', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
 
         return words.GroupBy(w => w)
                     .OrderByDescending(g => g.Count())
@@ -442,7 +442,7 @@ public static class Extensions
     // Find Least Frequent Word
     public static string LeastFrequentWord(this string input)
     {
-        var words = input.Split(new[] { ' ', '\t', '\n', '\r', '.', ',', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
+        string[] words = input.Split(new[] { ' ', '\t', '\n', '\r', '.', ',', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
 
         return words.GroupBy(w => w)
                     .OrderBy(g => g.Count())
