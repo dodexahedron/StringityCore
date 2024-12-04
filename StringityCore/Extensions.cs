@@ -35,6 +35,7 @@ public static class Extensions
     public static string ToStringReverse(this string input)
     {
         string strReversed = new (input.Reverse().ToArray());
+
         return strReversed;
     }
 
@@ -42,11 +43,14 @@ public static class Extensions
     {
         byte[] bytes = Encoding.UTF8.GetBytes(input);
         byte[] hash  = SHA256.Create().ComputeHash(bytes);
+
         return BytesToHex(hash);
     }
+
     public static string ToCompress(this string input)
     {
         var bytes = Encoding.Unicode.GetBytes(input);
+
         using (var msi = new MemoryStream(bytes))
         using (var mso = new MemoryStream())
         {
@@ -54,12 +58,15 @@ public static class Extensions
             {
                 msi.CopyTo(gs);
             }
+
             return Convert.ToBase64String(mso.ToArray());
         }
     }
+
     public static string ToDecompress(this string input)
     {
         var bytes = Convert.FromBase64String(input);
+
         using (var msi = new MemoryStream(bytes))
         using (var mso = new MemoryStream())
         {
@@ -67,6 +74,7 @@ public static class Extensions
             {
                 gs.CopyTo(mso);
             }
+
             return Encoding.Unicode.GetString(mso.ToArray());
         }
     }
@@ -99,6 +107,7 @@ public static class Extensions
             return input;
 
         var words = System.Text.RegularExpressions.Regex.Split(input, @"[\s_\-]+");
+
         if (words.Length == 0)
             return input;
 
@@ -116,6 +125,7 @@ public static class Extensions
             return input;
 
         var words = System.Text.RegularExpressions.Regex.Split(input, @"[\s_\-]+");
+
         if (words.Length == 0)
             return input;
 
@@ -133,6 +143,7 @@ public static class Extensions
             return input;
 
         var words = System.Text.RegularExpressions.Regex.Split(input, @"[\s_\-]+");
+
         if (words.Length == 0)
             return input;
 
@@ -196,6 +207,7 @@ public static class Extensions
         for (int i = n - 1; i > 0; i--)
         {
             int j = rng.Next(i + 1);
+
             // Swap array[i] with array[j]
             char temp = array[i];
             array[i] = array[j];
@@ -215,6 +227,7 @@ public static class Extensions
         for (int i = 0; i < array.Length; i++)
         {
             char c = array[i];
+
             if (char.IsLetter(c))
             {
                 array[i] = char.IsUpper(c) ? char.ToLower(c) : char.ToUpper(c);
@@ -233,10 +246,12 @@ public static class Extensions
     public static string FromHex(this string input)
     {
         var chars = new List<byte>();
+
         for (int i = 0; i < input.Length; i += 2)
         {
             chars.Add(Convert.ToByte(input.Substring(i, 2), 16));
         }
+
         return Encoding.UTF8.GetString(chars.ToArray());
     }
 
@@ -301,6 +316,7 @@ public static class Extensions
             return input;
         }
     }
+
     public static string ToBinary(this string input)
     {
         return string.Join(" ", input.Select(c => Convert.ToString(c, 2).PadLeft(8, '0')));
@@ -311,6 +327,7 @@ public static class Extensions
         var bytes = input.Split(' ')
                           .Select(b => Convert.ToByte(b, 2))
                           .ToArray();
+
         return Encoding.ASCII.GetString(bytes);
     }
 
@@ -399,6 +416,7 @@ public static class Extensions
     public static string MostFrequentWord(this string input)
     {
         var words = input.Split(new[] { ' ', '\t', '\n', '\r', '.', ',', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
+
         return words.GroupBy(w => w)
                     .OrderByDescending(g => g.Count())
                     .FirstOrDefault()?.Key ?? string.Empty;
@@ -417,6 +435,7 @@ public static class Extensions
     public static string LeastFrequentWord(this string input)
     {
         var words = input.Split(new[] { ' ', '\t', '\n', '\r', '.', ',', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
+
         return words.GroupBy(w => w)
                     .OrderBy(g => g.Count())
                     .FirstOrDefault()?.Key ?? string.Empty;
@@ -428,6 +447,7 @@ public static class Extensions
             return input;
 
         StringBuilder sb = new ();
+
         foreach (char c in input)
         {
             switch (c)
@@ -461,6 +481,7 @@ public static class Extensions
                     break;
             }
         }
+
         return sb.ToString();
     }
     public static string ToXmlEscaped(this string input)
@@ -478,6 +499,7 @@ public static class Extensions
     #region Private tools
 
     private static Random rng = new ();
+
     private static string BytesToHex(byte[] input)
     {
         return Convert.ToHexString(input).ToLower();
@@ -496,7 +518,6 @@ public static class Extensions
                                                                      };
 
     private static readonly Dictionary<string, char> MorseDecode = MorseAlphabet.ToDictionary(kvp => kvp.Value, kvp => kvp.Key);
-
 
     #endregion
 }
