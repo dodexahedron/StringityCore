@@ -4,9 +4,17 @@ using System.Text;
 
 namespace StringityCore;
 
+/// <summary>
+///     Class containing all extension methods defined by the library.
+/// </summary>
 [UsedImplicitly (ImplicitUseTargetFlags.Itself)]
 public static class Extensions
 {
+    /// <summary>
+    ///     Returns a string in aLtErNaTiNg CaSe, as commonly used to indicate sarcasm in internet communication.
+    /// </summary>
+    /// <param name="input">The boring string to make sArCaStIc.</param>
+    /// <returns>A new string with the same content as <paramref name="input"/>, but with aLtErNaTiNg CaSe.</returns>
     public static string ToSarcasm(this string input)
     {
         if (string.IsNullOrEmpty(input))
