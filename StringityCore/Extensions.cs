@@ -11,19 +11,54 @@ using System.Text.RegularExpressions;
 [UsedImplicitly (ImplicitUseTargetFlags.Itself)]
 public static class Extensions
 {
-    // Count Number of Characters
+    /// <summary>
+    ///     Gets the total count of <see cref="char"/> elements in the <paramref name="input"/> <see cref="string"/>.
+    /// </summary>
+    /// <param name="input">The string for which <see cref="char"/> elements are to be counted.</param>
+    /// <returns>Total count of <see cref="char"/> elements in the <paramref name="input"/> <see cref="string"/>.</returns>
+    /// <remarks>Total char count may not be equal to number of text elements.</remarks>
     public static string CountCharacters (this string input) => input.Length.ToString ();
 
-    // Count Number of Consonants
+    /// <summary>
+    ///     Gets the total count of <see cref="char"/> elements in the <paramref name="input"/> <see cref="string"/> that are in the
+    ///     range equivalent to the regular expression [^aeiouAUIOU].
+    /// </summary>
+    /// <param name="input">The string for which <see cref="char"/> elements are to be counted according to the inclusion rule as stated.</param>
+    /// <returns>
+    ///     Total count of <see cref="char"/> elements in the <paramref name="input"/> <see cref="string"/> that match the inclusion rule
+    ///     as stated.
+    /// </returns>
+    /// <remarks>
+    ///     Surrogate pairs, as well as vowels in non-English languages or letters which are functionally vowels in any language,
+    ///     including English, are not considered.
+    /// </remarks>
     public static string CountConsonants (this string input)
     {
         return input.Count (static c => char.IsLetter (c) && !"aeiouAEIOU".Contains (c)).ToString ();
     }
 
-    // Count Number of Digits
+    /// <summary>
+    ///     Gets the total count of <see cref="char"/> elements in the <paramref name="input"/> <see cref="string"/> that are classified
+    ///     as Unicode digits.
+    /// </summary>
+    /// <param name="input">The string for which <see cref="char"/> elements are to be counted according to the inclusion rule as stated.</param>
+    /// <returns>
+    ///     Total count of <see cref="char"/> elements in the <paramref name="input"/> <see cref="string"/> that match the inclusion rule
+    ///     as stated.
+    /// </returns>
+    /// <remarks>Surrogate pairs are not considered.</remarks>
     public static string CountDigits (this string input) => input.Count (char.IsDigit).ToString ();
 
-    // Count Number of Lowercase Characters
+    /// <summary>
+    ///     Gets the total count of <see cref="char"/> elements in the <paramref name="input"/> <see cref="string"/> that are classified
+    ///     as Unicode Lower Case Letters.
+    /// </summary>
+    /// <param name="input">The string for which <see cref="char"/> elements are to be counted according to the inclusion rule as stated.</param>
+    /// <returns>
+    ///     Total count of <see cref="char"/> elements in the <paramref name="input"/> <see cref="string"/> that match the inclusion rule
+    ///     as stated.
+    /// </returns>
+    /// <remarks>Surrogate pairs are not considered.</remarks>
     public static string CountLowercase (this string input) => input.Count (char.IsLower).ToString ();
 
     // Count Number of Paragraphs (Assuming double newline is a paragraph separator)
