@@ -13,6 +13,10 @@
     <WarningLevel>8</WarningLevel>
   </PropertyGroup>
   
+  <ItemGroup>
+    <Using Include="System.Globalization" />
+  </ItemGroup>
+  
   <!-- NuGet Package Properties -->
   <PropertyGroup>
     <Title>$(AssemblyName)</Title>

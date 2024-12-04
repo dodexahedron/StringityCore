@@ -1,4 +1,4 @@
-﻿using System.IO.Compression;
+using System.IO.Compression;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -19,12 +19,12 @@ namespace StringityCore
                 if (i % 2 == 0)
                 {
                     // Even index: make it lowercase
-                    result[i] = char.ToLower(input[i]);
+                    result [i] = char.ToLower (input [i], CultureInfo.CurrentUICulture);
                 }
                 else
                 {
                     // Odd index: make it uppercase
-                    result[i] = char.ToUpper(input[i]);
+                    result [i] = char.ToUpper (input [i], CultureInfo.CurrentUICulture);
                 }
             }
 
