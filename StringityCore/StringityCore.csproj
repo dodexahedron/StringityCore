@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <OutputType>Library</OutputType>
-    <Description>StringityCore Nuget for Common string utilities</Description>
+    <Description>StringityCore library for common string utilities</Description>
     <Copyright>MIT</Copyright>
     <PackageProjectUrl>https://github.com/Stringity/StringityCore</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Stringity/StringityCore</RepositoryUrl>
