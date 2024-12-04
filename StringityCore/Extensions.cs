@@ -59,32 +59,30 @@ public static class Extensions
     {
         byte[] bytes = Encoding.Unicode.GetBytes(input);
 
-        using (MemoryStream msi = new (bytes))
-        using (MemoryStream mso = new ())
-        {
-            using (GZipStream gs = new (mso, CompressionMode.Compress))
-            {
-                msi.CopyTo(gs);
-            }
+        using MemoryStream msi = new (bytes);
+        using MemoryStream mso = new ();
 
-            return Convert.ToBase64String(mso.ToArray());
+        using (GZipStream gs = new (mso, CompressionMode.Compress))
+        {
+            msi.CopyTo(gs);
         }
+
+        return Convert.ToBase64String(mso.ToArray());
     }
 
     public static string ToDecompress(this string input)
     {
         byte[] bytes = Convert.FromBase64String(input);
 
-        using (MemoryStream msi = new (bytes))
-        using (MemoryStream mso = new ())
-        {
-            using (GZipStream gs = new (msi, CompressionMode.Decompress))
-            {
-                gs.CopyTo(mso);
-            }
+        using MemoryStream msi = new (bytes);
+        using MemoryStream mso = new ();
 
-            return Encoding.Unicode.GetString(mso.ToArray());
+        using (GZipStream gs = new (msi, CompressionMode.Decompress))
+        {
+            gs.CopyTo(mso);
         }
+
+        return Encoding.Unicode.GetString(mso.ToArray());
     }
 
     public static string ToSnakeCase(this string input)
