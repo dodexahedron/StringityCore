@@ -390,7 +390,7 @@ public static class Extensions
         byte [] bytes = Encoding.UTF8.GetBytes (input);
         byte [] hash  = SHA256.Create ().ComputeHash (bytes);
 
-        return BytesToHex (hash);
+        return Convert.ToHexString (hash).ToLower ();
     }
 
     public static string ToSnakeCase (this string input)
@@ -491,8 +491,6 @@ public static class Extensions
     }
 
     #region Private tools
-
-    private static string BytesToHex (byte [] input) => Convert.ToHexString (input).ToLower ();
 
     private static readonly Dictionary<char, string> _morseAlphabet = new ()
                                                                       {
