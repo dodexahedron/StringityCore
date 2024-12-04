@@ -189,9 +189,7 @@ public static class Extensions
             int j = rng.Next (i + 1);
 
             // Swap array[i] with array[j]
-            char temp = array [i];
-            array [i] = array [j];
-            array [j] = temp;
+            (array [i], array [j]) = (array [j], array [i]);
         }
 
         return new (array);
