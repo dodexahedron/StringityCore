@@ -429,13 +429,40 @@ public static class Extensions
         return string.Join (" ", words);
     }
 
-    // Convert to Unicode
+    /// <summary>
+    ///     Gets a new string that is the same as <paramref name="input"/>, converted to UTF-16 little-endian.
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns>A new string that is the same as <paramref name="input"/>, converted to UTF-16 little-endian.</returns>
+    /// <remarks>
+    ///     Most Unicode implementations expect UTF-16 to be little-endian, unless a byte order mark is included and understood by the
+    ///     recipient.
+    /// </remarks>
+    /// <remarks>This method will not include a byte order mark.</remarks>
     public static string ToUnicode (this string input) => Encoding.Unicode.GetString (Encoding.Unicode.GetBytes (input));
 
-    // Convert to UTF-16
-    public static string ToUtf16 (this string input) => Encoding.BigEndianUnicode.GetString (Encoding.BigEndianUnicode.GetBytes (input));
+    /// <summary>
+    ///     Gets a new string that is the same as <paramref name="input"/>, converted to UTF-16 big-endian.
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns>A new string that is the same as <paramref name="input"/>, converted to UTF-16 big-endian.</returns>
+    /// <remarks>
+    ///     Most Unicode implementations expect UTF-16 to be little-endian, unless a byte order mark is included and understood by the
+    ///     recipient.
+    /// </remarks>
+    /// <remarks>This method will not include a byte order mark.</remarks>
+    public static string ToUtf16BE (this string input) => Encoding.BigEndianUnicode.GetString (Encoding.BigEndianUnicode.GetBytes (input));
 
-    // Convert to UTF-32
+    /// <summary>
+    ///     Gets a new string that is the same as <paramref name="input"/>, converted to UTF-32 little-endian.
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns>A new string that is the same as <paramref name="input"/>, converted to UTF-32 little-endian.</returns>
+    /// <remarks>
+    ///     Most Unicode implementations expect UTF-32 to be little-endian, unless a byte order mark is included and understood by the
+    ///     recipient.
+    /// </remarks>
+    /// <remarks>This method will not include a byte order mark.</remarks>
     public static string ToUtf32 (this string input) => Encoding.UTF32.GetString (Encoding.UTF32.GetBytes (input));
 
     // Convert to UTF-8
