@@ -458,17 +458,12 @@ public static class Extensions
 
     private static char Rot13Char (char input)
     {
-        if (input >= 'a' && input <= 'z')
-        {
-            return (char)('a' + (input - 'a' + 13) % 26);
-        }
-
-        if (input >= 'A' && input <= 'Z')
-        {
-            return (char)('A' + (input - 'A' + 13) % 26);
-        }
-
-        return input;
+        return input switch
+               {
+                   >= 'a' and <= 'z' => (char)('a' + (input - 'a' + 13) % 26),
+                   >= 'A' and <= 'Z' => (char)('A' + (input - 'A' + 13) % 26),
+                   _                 => input
+               };
     }
 
     #region Private tools
