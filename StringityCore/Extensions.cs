@@ -32,21 +32,21 @@ public static class Extensions
         return new string(result);
     }
 
-    public static string ToStringReverse(this string source)
+    public static string ToStringReverse(this string input)
     {
-        string strReversed = new string(source.Reverse().ToArray());
+        string strReversed = new string(input.Reverse().ToArray());
         return strReversed;
     }
 
-    public static string ToSHA256(this string data)
+    public static string ToSHA256(this string input)
     {
-        byte[] bytes = Encoding.UTF8.GetBytes(data);
+        byte[] bytes = Encoding.UTF8.GetBytes(input);
         byte[] hash  = SHA256.Create().ComputeHash(bytes);
         return BytesToHex(hash);
     }
-    public static string ToCompress(this string s)
+    public static string ToCompress(this string input)
     {
-        var bytes = Encoding.Unicode.GetBytes(s);
+        var bytes = Encoding.Unicode.GetBytes(input);
         using (var msi = new MemoryStream(bytes))
         using (var mso = new MemoryStream())
         {
@@ -57,9 +57,9 @@ public static class Extensions
             return Convert.ToBase64String(mso.ToArray());
         }
     }
-    public static string ToDecompress(this string s)
+    public static string ToDecompress(this string input)
     {
-        var bytes = Convert.FromBase64String(s);
+        var bytes = Convert.FromBase64String(input);
         using (var msi = new MemoryStream(bytes))
         using (var mso = new MemoryStream())
         {
@@ -230,12 +230,12 @@ public static class Extensions
     }
 
     // Hex Decode
-    public static string FromHex(this string hex)
+    public static string FromHex(this string input)
     {
         var chars = new List<byte>();
-        for (int i = 0; i < hex.Length; i += 2)
+        for (int i = 0; i < input.Length; i += 2)
         {
-            chars.Add(Convert.ToByte(hex.Substring(i, 2), 16));
+            chars.Add(Convert.ToByte(input.Substring(i, 2), 16));
         }
         return Encoding.UTF8.GetString(chars.ToArray());
     }
@@ -286,19 +286,19 @@ public static class Extensions
         return string.Concat(input.Select(c => Rot13Char(c)));
     }
 
-    private static char Rot13Char(char c)
+    private static char Rot13Char(char input)
     {
-        if (c >= 'a' && c <= 'z')
+        if (input >= 'a' && input <= 'z')
         {
-            return (char)('a' + (c - 'a' + 13) % 26);
+            return (char)('a' + (input - 'a' + 13) % 26);
         }
-        else if (c >= 'A' && c <= 'Z')
+        else if (input >= 'A' && input <= 'Z')
         {
-            return (char)('A' + (c - 'A' + 13) % 26);
+            return (char)('A' + (input - 'A' + 13) % 26);
         }
         else
         {
-            return c;
+            return input;
         }
     }
     public static string ToBinary(this string input)
@@ -306,9 +306,9 @@ public static class Extensions
         return string.Join(" ", input.Select(c => Convert.ToString(c, 2).PadLeft(8, '0')));
     }
 
-    public static string FromBinary(this string binary)
+    public static string FromBinary(this string input)
     {
-        var bytes = binary.Split(' ')
+        var bytes = input.Split(' ')
                           .Select(b => Convert.ToByte(b, 2))
                           .ToArray();
         return Encoding.ASCII.GetString(bytes);
@@ -478,9 +478,9 @@ public static class Extensions
     #region Private tools
 
     private static Random rng = new Random();
-    private static string BytesToHex(byte[] bytes)
+    private static string BytesToHex(byte[] input)
     {
-        return Convert.ToHexString(bytes).ToLower();
+        return Convert.ToHexString(input).ToLower();
     }
 
     private static readonly Dictionary<char, string> MorseAlphabet = new Dictionary<char, string>
