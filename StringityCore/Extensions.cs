@@ -148,7 +148,7 @@ public static class Extensions
         if (string.IsNullOrWhiteSpace (input))
             return input;
 
-        return Regex.Replace (input, @"[a-zA-Z]", "");
+        return Regex.Replace (input, "[a-zA-Z]", "");
     }
 
     public static string RemoveNonAlphanumeric (this string input)
@@ -156,7 +156,7 @@ public static class Extensions
         if (string.IsNullOrWhiteSpace (input))
             return input;
 
-        return Regex.Replace (input, @"[^a-zA-Z0-9]", "");
+        return Regex.Replace (input, "[^a-zA-Z0-9]", "");
     }
 
     public static string RemoveNonAscii (this string input)
@@ -328,7 +328,7 @@ public static class Extensions
         if (string.IsNullOrWhiteSpace (input))
             return input;
 
-        return Regex.Replace (input, @"([a-z])([A-Z])", "$1-$2")
+        return Regex.Replace (input, "([a-z])([A-Z])", "$1-$2")
                     .Replace ("_", "-")
                     .Replace (" ", "-")
                     .ToLower ();
@@ -403,7 +403,7 @@ public static class Extensions
         if (string.IsNullOrWhiteSpace (input))
             return input;
 
-        return Regex.Replace (input, @"([a-z])([A-Z])", "$1_$2")
+        return Regex.Replace (input, "([a-z])([A-Z])", "$1_$2")
                     .Replace ("-", "_")
                     .Replace (" ", "_")
                     .ToLower ();
