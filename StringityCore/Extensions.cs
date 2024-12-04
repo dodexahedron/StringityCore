@@ -27,19 +27,15 @@ public static class Extensions
     public static string CountLowercase (this string input) => input.Count (char.IsLower).ToString ();
 
     // Count Number of Paragraphs (Assuming double newline is a paragraph separator)
-    public static string CountParagraphs (this string input)
-    {
-        return input.Split (["\n\n", "\r\n\r\n"], StringSplitOptions.RemoveEmptyEntries).Length.ToString ();
-    }
+    public static string CountParagraphs (this string input) =>
+        input.Split (["\n\n", "\r\n\r\n"], StringSplitOptions.RemoveEmptyEntries).Length.ToString ();
 
     // Count Number of Punctuation Marks
     public static string CountPunctuation (this string input) => input.Count (char.IsPunctuation).ToString ();
 
     // Count Number of Sentences (Assuming periods, exclamation marks, or question marks indicate a sentence)
-    public static string CountSentences (this string input)
-    {
-        return input.Split (['.', '!', '?'], StringSplitOptions.RemoveEmptyEntries).Length.ToString ();
-    }
+    public static string CountSentences (this string input) =>
+        input.Split (['.', '!', '?'], StringSplitOptions.RemoveEmptyEntries).Length.ToString ();
 
     // Count Number of Uppercase Characters
     public static string CountUppercase (this string input) => input.Count (char.IsUpper).ToString ();
@@ -51,10 +47,8 @@ public static class Extensions
     public static string CountWhitespace (this string input) => input.Count (char.IsWhiteSpace).ToString ();
 
     // Count Number of Words
-    public static string CountWords (this string input)
-    {
-        return input.Split ([' ', '\t', '\n', '\r'], StringSplitOptions.RemoveEmptyEntries).Length.ToString ();
-    }
+    public static string CountWords (this string input) =>
+        input.Split ([' ', '\t', '\n', '\r'], StringSplitOptions.RemoveEmptyEntries).Length.ToString ();
 
     public static string FromBinary (this string input)
     {
@@ -217,7 +211,10 @@ public static class Extensions
 
     public static string ToAscii (this string input) => Encoding.ASCII.GetString (Encoding.ASCII.GetBytes (input));
 
-    public static string ToBinary (this string input) { return string.Join (" ", input.Select (static c => Convert.ToString (c, 2).PadLeft (8, '0'))); }
+    public static string ToBinary (this string input)
+    {
+        return string.Join (" ", input.Select (static c => Convert.ToString (c, 2).PadLeft (8, '0')));
+    }
 
     public static string ToCamelCase (this string input)
     {
@@ -310,7 +307,7 @@ public static class Extensions
                     break;
                 default:
                     if (c < ' ' || c > 127)
-                        sb.AppendFormat ("\\u{0:X4}", (int)c);
+                        sb.Append ($"\\u{(int)c:X4}");
                     else
                         sb.Append (c);
 
@@ -473,23 +470,23 @@ public static class Extensions
     private static string BytesToHex (byte [] input) => Convert.ToHexString (input).ToLower ();
 
     private static readonly Dictionary<char, string> _morseAlphabet = new ()
-                                                                     {
-                                                                         { 'A', ".-" }, { 'B', "-..." }, { 'C', "-.-." }, { 'D', "-.." },
-                                                                         { 'E', "." },
-                                                                         { 'F', "..-." }, { 'G', "--." }, { 'H', "...." }, { 'I', ".." },
-                                                                         { 'J', ".---" },
-                                                                         { 'K', "-.-" }, { 'L', ".-.." }, { 'M', "--" }, { 'N', "-." },
-                                                                         { 'O', "---" },
-                                                                         { 'P', ".--." }, { 'Q', "--.-" }, { 'R', ".-." }, { 'S', "..." },
-                                                                         { 'T', "-" },
-                                                                         { 'U', "..-" }, { 'V', "...-" }, { 'W', ".--" }, { 'X', "-..-" },
-                                                                         { 'Y', "-.--" },
-                                                                         { 'Z', "--.." }, { '1', ".----" }, { '2', "..---" }, { '3', "...--" },
-                                                                         { '4', "....-" },
-                                                                         { '5', "....." }, { '6', "-...." }, { '7', "--..." }, { '8', "---.." },
-                                                                         { '9', "----." },
-                                                                         { '0', "-----" }
-                                                                     };
+                                                                      {
+                                                                          { 'A', ".-" }, { 'B', "-..." }, { 'C', "-.-." }, { 'D', "-.." },
+                                                                          { 'E', "." },
+                                                                          { 'F', "..-." }, { 'G', "--." }, { 'H', "...." }, { 'I', ".." },
+                                                                          { 'J', ".---" },
+                                                                          { 'K', "-.-" }, { 'L', ".-.." }, { 'M', "--" }, { 'N', "-." },
+                                                                          { 'O', "---" },
+                                                                          { 'P', ".--." }, { 'Q', "--.-" }, { 'R', ".-." }, { 'S', "..." },
+                                                                          { 'T', "-" },
+                                                                          { 'U', "..-" }, { 'V', "...-" }, { 'W', ".--" }, { 'X', "-..-" },
+                                                                          { 'Y', "-.--" },
+                                                                          { 'Z', "--.." }, { '1', ".----" }, { '2', "..---" }, { '3', "...--" },
+                                                                          { '4', "....-" },
+                                                                          { '5', "....." }, { '6', "-...." }, { '7', "--..." }, { '8', "---.." },
+                                                                          { '9', "----." },
+                                                                          { '0', "-----" }
+                                                                      };
 
     private static readonly Dictionary<string, char> _morseDecode = _morseAlphabet.ToDictionary (static kvp => kvp.Value, static kvp => kvp.Key);
 
