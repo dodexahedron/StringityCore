@@ -28,6 +28,8 @@
     <ApplicationIcon>Assets\Icons\strlogoicon.ico</ApplicationIcon>
     <PackageIcon>strlogo.png</PackageIcon>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <!-- NuGet Package Assets -->
