@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <OutputType>Library</OutputType>
     <Description>StringityCore library for common string utilities</Description>
-    <Copyright>MIT</Copyright>
+    <Copyright>2024 mathis1337 - Provided under the terms of the MIT Expat license</Copyright>
     <PackageProjectUrl>https://github.com/Stringity/StringityCore</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Stringity/StringityCore</RepositoryUrl>
     <Version>1.0.0</Version>
