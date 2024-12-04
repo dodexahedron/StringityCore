@@ -29,7 +29,7 @@ public static class Extensions
     // Count Number of Paragraphs (Assuming double newline is a paragraph separator)
     public static string CountParagraphs (this string input)
     {
-        return input.Split (new [] { "\n\n", "\r\n\r\n" }, StringSplitOptions.RemoveEmptyEntries).Length.ToString ();
+        return input.Split (["\n\n", "\r\n\r\n"], StringSplitOptions.RemoveEmptyEntries).Length.ToString ();
     }
 
     // Count Number of Punctuation Marks
@@ -38,7 +38,7 @@ public static class Extensions
     // Count Number of Sentences (Assuming periods, exclamation marks, or question marks indicate a sentence)
     public static string CountSentences (this string input)
     {
-        return input.Split (new [] { '.', '!', '?' }, StringSplitOptions.RemoveEmptyEntries).Length.ToString ();
+        return input.Split (['.', '!', '?'], StringSplitOptions.RemoveEmptyEntries).Length.ToString ();
     }
 
     // Count Number of Uppercase Characters
@@ -53,7 +53,7 @@ public static class Extensions
     // Count Number of Words
     public static string CountWords (this string input)
     {
-        return input.Split (new [] { ' ', '\t', '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries).Length.ToString ();
+        return input.Split ([' ', '\t', '\n', '\r'], StringSplitOptions.RemoveEmptyEntries).Length.ToString ();
     }
 
     public static string FromBinary (this string input)
@@ -68,7 +68,7 @@ public static class Extensions
     // Hex Decode
     public static string FromHex (this string input)
     {
-        List<byte> chars = new ();
+        List<byte> chars = [];
 
         for (int i = 0; i < input.Length; i += 2)
         {
@@ -102,7 +102,7 @@ public static class Extensions
     // Find Least Frequent Word
     public static string LeastFrequentWord (this string input)
     {
-        string [] words = input.Split (new [] { ' ', '\t', '\n', '\r', '.', ',', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
+        string [] words = input.Split ([' ', '\t', '\n', '\r', '.', ',', '!', '?'], StringSplitOptions.RemoveEmptyEntries);
 
         return words.GroupBy (static w => w)
                     .OrderBy (static g => g.Count ())
@@ -126,7 +126,7 @@ public static class Extensions
     // Find Most Frequent Word
     public static string MostFrequentWord (this string input)
     {
-        string [] words = input.Split (new [] { ' ', '\t', '\n', '\r', '.', ',', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
+        string [] words = input.Split ([' ', '\t', '\n', '\r', '.', ',', '!', '?'], StringSplitOptions.RemoveEmptyEntries);
 
         return words.GroupBy (static w => w)
                     .OrderByDescending (static g => g.Count ())
