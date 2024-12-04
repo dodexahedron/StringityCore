@@ -1,7 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <RootNamespace>$(AssemblyName)</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <OutputType>Library</OutputType>
@@ -12,7 +13,7 @@
   
   <!-- NuGet Package Properties -->
   <PropertyGroup>
-    <Title>StringityCore</Title>
+    <Title>$(AssemblyName)</Title>
     <Authors>Mathis1337</Authors>
     <Description>StringityCore library for common string utilities</Description>
     <Copyright>2024 mathis1337 - Provided under the terms of the MIT Expat license</Copyright>
