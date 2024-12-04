@@ -85,7 +85,7 @@ public static class Extensions
     }
 
     // Get String Length
-    public static string GetLength (this string input) => input.Length.ToString ();
+    public static string GetLength (this string input) => input.CountCharacters ();
 
     // Find Least Frequent Character
     public static string LeastFrequentCharacter (this string input)
