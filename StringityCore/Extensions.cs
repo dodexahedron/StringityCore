@@ -17,7 +17,7 @@ public static class Extensions
     // Count Number of Consonants
     public static string CountConsonants (this string input)
     {
-        return input.Count (c => char.IsLetter (c) && !"aeiouAEIOU".Contains (c)).ToString ();
+        return input.Count (static c => char.IsLetter (c) && !"aeiouAEIOU".Contains (c)).ToString ();
     }
 
     // Count Number of Digits
@@ -45,7 +45,7 @@ public static class Extensions
     public static string CountUppercase (this string input) => input.Count (char.IsUpper).ToString ();
 
     // Count Number of Vowels
-    public static string CountVowels (this string input) { return input.Count (c => "aeiouAEIOU".Contains (c)).ToString (); }
+    public static string CountVowels (this string input) { return input.Count (static c => "aeiouAEIOU".Contains (c)).ToString (); }
 
     // Count Number of Whitespace Characters
     public static string CountWhitespace (this string input) => input.Count (char.IsWhiteSpace).ToString ();
@@ -59,7 +59,7 @@ public static class Extensions
     public static string FromBinary (this string input)
     {
         byte [] bytes = input.Split (' ')
-                             .Select (b => Convert.ToByte (b, 2))
+                             .Select (static b => Convert.ToByte (b, 2))
                              .ToArray ();
 
         return Encoding.ASCII.GetString (bytes);
@@ -81,7 +81,7 @@ public static class Extensions
     // Morse Decode
     public static string FromMorseCode (this string input)
     {
-        return string.Concat (input.Split (' ').Where (m => MorseDecode.ContainsKey (m)).Select (m => MorseDecode [m]));
+        return string.Concat (input.Split (' ').Where (static m => MorseDecode.ContainsKey (m)).Select (static m => MorseDecode [m]));
     }
 
     // Get String Length
@@ -91,8 +91,8 @@ public static class Extensions
     public static string LeastFrequentCharacter (this string input)
     {
         return input.Where (char.IsLetterOrDigit)
-                    .GroupBy (c => c)
-                    .OrderBy (g => g.Count ())
+                    .GroupBy (static c => c)
+                    .OrderBy (static g => g.Count ())
                     .FirstOrDefault ()
                    ?.Key
                     .ToString ()
@@ -104,8 +104,8 @@ public static class Extensions
     {
         string [] words = input.Split (new [] { ' ', '\t', '\n', '\r', '.', ',', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
 
-        return words.GroupBy (w => w)
-                    .OrderBy (g => g.Count ())
+        return words.GroupBy (static w => w)
+                    .OrderBy (static g => g.Count ())
                     .FirstOrDefault ()
                    ?.Key
             ?? string.Empty;
@@ -115,8 +115,8 @@ public static class Extensions
     public static string MostFrequentCharacter (this string input)
     {
         return input.Where (char.IsLetterOrDigit)
-                    .GroupBy (c => c)
-                    .OrderByDescending (g => g.Count ())
+                    .GroupBy (static c => c)
+                    .OrderByDescending (static g => g.Count ())
                     .FirstOrDefault ()
                    ?.Key
                     .ToString ()
@@ -128,8 +128,8 @@ public static class Extensions
     {
         string [] words = input.Split (new [] { ' ', '\t', '\n', '\r', '.', ',', '!', '?' }, StringSplitOptions.RemoveEmptyEntries);
 
-        return words.GroupBy (w => w)
-                    .OrderByDescending (g => g.Count ())
+        return words.GroupBy (static w => w)
+                    .OrderByDescending (static g => g.Count ())
                     .FirstOrDefault ()
                    ?.Key
             ?? string.Empty;
@@ -219,7 +219,7 @@ public static class Extensions
 
     public static string ToAscii (this string input) => Encoding.ASCII.GetString (Encoding.ASCII.GetBytes (input));
 
-    public static string ToBinary (this string input) { return string.Join (" ", input.Select (c => Convert.ToString (c, 2).PadLeft (8, '0'))); }
+    public static string ToBinary (this string input) { return string.Join (" ", input.Select (static c => Convert.ToString (c, 2).PadLeft (8, '0'))); }
 
     public static string ToCamelCase (this string input)
     {
@@ -269,7 +269,7 @@ public static class Extensions
         return Encoding.Unicode.GetString (mso.ToArray ());
     }
 
-    public static string ToHex (this string input) { return string.Concat (input.Select (c => ((int)c).ToString ("X2"))); }
+    public static string ToHex (this string input) { return string.Concat (input.Select (static c => ((int)c).ToString ("X2"))); }
 
     public static string ToJsonEscaped (this string input)
     {
@@ -336,7 +336,7 @@ public static class Extensions
 
     public static string ToMorseCode (this string input)
     {
-        return string.Join (" ", input.ToUpper ().Where (c => MorseAlphabet.ContainsKey (c)).Select (c => MorseAlphabet [c]));
+        return string.Join (" ", input.ToUpper ().Where (static c => MorseAlphabet.ContainsKey (c)).Select (static c => MorseAlphabet [c]));
     }
 
     public static string ToPascalCase (this string input)
@@ -358,7 +358,7 @@ public static class Extensions
     }
 
     // ROT13 Encode/Decode
-    public static string ToRot13 (this string input) { return string.Concat (input.Select (c => Rot13Char (c))); }
+    public static string ToRot13 (this string input) => string.Concat (input.Select (Rot13Char));
 
     /// <summary>
     ///     Returns a string in aLtErNaTiNg CaSe, as commonly used to indicate sarcasm in internet communication.
@@ -498,7 +498,7 @@ public static class Extensions
                                                                          { '0', "-----" }
                                                                      };
 
-    private static readonly Dictionary<string, char> MorseDecode = MorseAlphabet.ToDictionary (kvp => kvp.Value, kvp => kvp.Key);
+    private static readonly Dictionary<string, char> MorseDecode = MorseAlphabet.ToDictionary (static kvp => kvp.Value, static kvp => kvp.Key);
 
     #endregion
 }
