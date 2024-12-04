@@ -14,9 +14,14 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <Using Include="System.Globalization" />
+    <PackageReference Include="JetBrains.Annotations" Version="2024.3.0" PrivateAssets="all" />
   </ItemGroup>
   
+  <ItemGroup>
+    <Using Include="System.Globalization" />
+    <Using Include="JetBrains.Annotations" />
+  </ItemGroup>
+
   <!-- NuGet Package Properties -->
   <PropertyGroup>
     <Title>$(AssemblyName)</Title>

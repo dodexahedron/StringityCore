@@ -4,6 +4,7 @@ using System.Text;
 
 namespace StringityCore;
 
+[UsedImplicitly (ImplicitUseTargetFlags.Itself)]
 public static class Extensions
 {
     public static string ToSarcasm(this string input)
