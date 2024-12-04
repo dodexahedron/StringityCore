@@ -180,7 +180,7 @@ public static class Extensions
         // Fisher-Yates shuffle algorithm
         for (int i = n - 1; i > 0; i--)
         {
-            int j = _rng.Next (i + 1);
+            int j = Random.Shared.Next (i + 1);
 
             // Swap array[i] with array[j]
             (array [i], array [j]) = (array [j], array [i]);
@@ -491,8 +491,6 @@ public static class Extensions
     }
 
     #region Private tools
-
-    private static readonly Random _rng = new ();
 
     private static string BytesToHex (byte [] input) => Convert.ToHexString (input).ToLower ();
 
