@@ -29,12 +29,12 @@ public static class Extensions
             }
         }
 
-        return new string(result);
+        return new (result);
     }
 
     public static string ToStringReverse(this string input)
     {
-        string strReversed = new string(input.Reverse().ToArray());
+        string strReversed = new (input.Reverse().ToArray());
         return strReversed;
     }
 
@@ -202,7 +202,7 @@ public static class Extensions
             array[j] = temp;
         }
 
-        return new string(array);
+        return new (array);
     }
 
     public static string SwapCase(this string input)
@@ -221,7 +221,7 @@ public static class Extensions
             }
         }
 
-        return new string(array);
+        return new (array);
     }
 
     public static string ToHex(this string input)
@@ -427,7 +427,7 @@ public static class Extensions
         if (string.IsNullOrEmpty(input))
             return input;
 
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new ();
         foreach (char c in input)
         {
             switch (c)
@@ -477,13 +477,13 @@ public static class Extensions
 
     #region Private tools
 
-    private static Random rng = new Random();
+    private static Random rng = new ();
     private static string BytesToHex(byte[] input)
     {
         return Convert.ToHexString(input).ToLower();
     }
 
-    private static readonly Dictionary<char, string> MorseAlphabet = new Dictionary<char, string>
+    private static readonly Dictionary<char, string> MorseAlphabet = new()
                                                                      {
                                                                          {'A', ".-"}, {'B', "-..."}, {'C', "-.-."}, {'D', "-.."}, {'E', "."},
                                                                          {'F', "..-."}, {'G', "--."}, {'H', "...."}, {'I', ".."}, {'J', ".---"},
