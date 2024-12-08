@@ -119,7 +119,7 @@ public static partial class Extensions
     public static int CountParagraphs (this string input) => CountParagraphs (input.AsSpan ());
 
     /// <summary>
-    ///     Gets the total number of char instances in <paramref name="input"/> which are in the Unicode Punctuation class.
+    ///     Gets the total number of char instances in <paramref name="input"/> which are in the Unicode Punctuation category.
     /// </summary>
     /// <param name="input">The text for which punctuation is to be counted.</param>
     /// <returns>The total count of punctuation characters.</returns>
@@ -143,7 +143,15 @@ public static partial class Extensions
     [MethodImpl (MethodImplOptions.AggressiveInlining)]
     public static int CountVowels (this string input) { return input.Count (static c => "aeiouAEIOU".Contains (c)); }
 
-    // Count Number of Whitespace Characters
+    /// <summary>
+    ///     Gets the total count of <see langword="char"/> instances belonging to the Unicode Whitespace category.
+    /// </summary>
+    /// <param name="input">The text for which whitespace is to be counted.</param>
+    /// <returns>
+    ///     The total number of <see langword="char"/> instances in the <paramref name="input"/> <see langword="string"/> that match the
+    ///     inclusion rule as stated.
+    /// </returns>
+    /// <remarks>Surrogate pairs are not considered. All characters must be within the Unicode Basic Multilingual Plane.</remarks>
     [MethodImpl (MethodImplOptions.AggressiveInlining)]
     public static int CountWhitespace (this string input) => input.Count (char.IsWhiteSpace);
 
