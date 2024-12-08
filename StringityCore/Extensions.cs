@@ -15,6 +15,7 @@ public static partial class Extensions
     /// <param name="input">The string for which <see cref="char"/> elements are to be counted.</param>
     /// <returns>Total count of <see cref="char"/> elements in the <paramref name="input"/> <see cref="string"/>.</returns>
     /// <remarks>Total char count may not be equal to number of text elements.</remarks>
+    [MethodImpl (MethodImplOptions.AggressiveInlining)]
     public static int CountCharacters (this string input) => input.Length;
 
     /// <summary>
@@ -28,6 +29,7 @@ public static partial class Extensions
     /// <returns>Total count of <see cref="char"/> elements in <paramref name="input"/>.</returns>
     /// <remarks>Total char count may not be equal to number of text elements.</remarks>
     /// <remarks>This method is identical to using <see cref="ReadOnlySpan{T}.Length">ReadOnlySpan&lt;char&gt;.Length</see>.</remarks>
+    [MethodImpl (MethodImplOptions.AggressiveInlining)]
     public static int CountCharacters (this ReadOnlySpan<char> input) => input.Length;
 
     /// <summary>
@@ -43,6 +45,7 @@ public static partial class Extensions
     ///     Surrogate pairs, as well as vowels in non-English languages or letters which are functionally vowels in any language,
     ///     including English, are not considered.
     /// </remarks>
+    [MethodImpl (MethodImplOptions.AggressiveInlining)]
     public static int CountConsonants (this string input)
     {
         return input.Count (static c => char.IsLetter (c) && !"aeiouAEIOU".Contains (c));
@@ -58,6 +61,7 @@ public static partial class Extensions
     ///     as stated.
     /// </returns>
     /// <remarks>Surrogate pairs are not considered.</remarks>
+    [MethodImpl (MethodImplOptions.AggressiveInlining)]
     public static int CountDigits (this string input) => input.Count (char.IsDigit);
 
     /// <summary>
@@ -70,6 +74,7 @@ public static partial class Extensions
     ///     as stated.
     /// </returns>
     /// <remarks>Surrogate pairs are not considered. All characters must be within the Unicode Basic Multilingual Plane.</remarks>
+    [MethodImpl (MethodImplOptions.AggressiveInlining)]
     public static int CountLowercase (this string input) => input.Count (char.IsLower);
 
     /// <summary>
@@ -97,6 +102,7 @@ public static partial class Extensions
     ///         demonstration.
     ///     </para>
     /// </remarks>
+    [MethodImpl (MethodImplOptions.AggressiveInlining)]
     public static int CountParagraphs (this ReadOnlySpan<char> input)
     {
         if (input.IsEmpty || input.IsWhiteSpace ())
@@ -108,6 +114,7 @@ public static partial class Extensions
     }
 
     /// <inheritdoc cref="CountParagraphs(System.ReadOnlySpan{char})"/>
+    [MethodImpl (MethodImplOptions.AggressiveInlining)]
     public static int CountParagraphs (this string input) => CountParagraphs (input.AsSpan ());
 
     /// <summary>
@@ -119,22 +126,28 @@ public static partial class Extensions
     ///     Surrogate pairs are not considered. All characters must be in the Unicode Basic Multilingual Plane.<br/>
     ///     Pairs of opening and closing punctuation marks are counted as their individual marks - not as pairs.
     /// </remarks>
+    [MethodImpl (MethodImplOptions.AggressiveInlining)]
     public static int CountPunctuation (this string input) => input.Count (char.IsPunctuation);
 
     // Count Number of Sentences (Assuming periods, exclamation marks, or question marks indicate a sentence)
+    [MethodImpl (MethodImplOptions.AggressiveInlining)]
     public static int CountSentences (this string input) =>
         input.Split (['.', '!', '?'], StringSplitOptions.RemoveEmptyEntries).Length;
 
     // Count Number of Uppercase Characters
+    [MethodImpl (MethodImplOptions.AggressiveInlining)]
     public static int CountUppercase (this string input) => input.Count (char.IsUpper);
 
     // Count Number of Vowels
+    [MethodImpl (MethodImplOptions.AggressiveInlining)]
     public static int CountVowels (this string input) { return input.Count (static c => "aeiouAEIOU".Contains (c)); }
 
     // Count Number of Whitespace Characters
+    [MethodImpl (MethodImplOptions.AggressiveInlining)]
     public static int CountWhitespace (this string input) => input.Count (char.IsWhiteSpace);
 
     // Count Number of Words
+    [MethodImpl (MethodImplOptions.AggressiveInlining)]
     public static int CountWords (this string input) =>
         input.Split ([' ', '\t', '\n', '\r'], StringSplitOptions.RemoveEmptyEntries).Length;
 

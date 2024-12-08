@@ -21,6 +21,7 @@
   </ItemGroup>
   
   <ItemGroup>
+    <Using Include="System.Runtime.CompilerServices" />
     <Using Include="System.Globalization" />
     <Using Include="System.Text" />
     <Using Include="System.Text.RegularExpressions" />
