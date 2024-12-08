@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 /// <summary>
 ///     Class containing all extension methods defined by the library.
 /// </summary>
-[UsedImplicitly (ImplicitUseTargetFlags.Itself)]
+[PublicAPI]
 public static partial class Extensions
 {
     /// <summary>
