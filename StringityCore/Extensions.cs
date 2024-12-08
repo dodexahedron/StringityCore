@@ -47,10 +47,7 @@ public static partial class Extensions
     ///     including English, are not considered.
     /// </remarks>
     [MethodImpl (MethodImplOptions.AggressiveInlining)]
-    public static int CountConsonants (this string input)
-    {
-        return input.Count (static c => char.IsLetter (c) && !"aeiouAEIOU".Contains (c));
-    }
+    public static int CountConsonants (this string input) { return input.Count (static c => char.IsLetter (c) && !"aeiouAEIOU".Contains (c)); }
 
     /// <summary>
     ///     Gets the total count of <see cref="char"/> elements in the <paramref name="input"/> <see cref="string"/> that are classified
