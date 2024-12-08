@@ -190,6 +190,22 @@ public static partial class Extensions
             ?? string.Empty;
     }
 
+    /// <summary>
+    ///     Gets a Unicode-aware count of all printable whitespace and non-whitespace glyphs in <paramref name="input"/>, accounting for
+    ///     surrogate pairs and combining marks.<br/>
+    ///     This is the logical length of the text, as visible on screen, and may differ significantly from <see cref="string.Length"/>,
+    ///     which is a raw count of <see cref="char"/> instances and does not understand surrogate pairs or combining marks.
+    /// </summary>
+    /// <param name="input">The text to count </param>
+    /// <returns>The length of <see cref="input"/> in printable glyphs.</returns>
+    /// <remarks>
+    ///     Input must be a well-formed string in Unicode Normalization Form C. Most strings will be in this form. However, the caller is
+    ///     responsible for ensuring proper normalization before calling this method.<br/>
+    ///     This method calls <see cref="StringInfo.ParseCombiningCharacters"/> and returns the length of the result.<br/>
+    ///     An array of indexes (<see cref="int"/>[]) is allocated, but no other heap allocations are involved.
+    /// </remarks>
+    public static int LengthInTextElements (this string input) => StringInfo.ParseCombiningCharacters (input).Length;
+
     // Find Most Frequent Character
     public static string MostFrequentCharacter (this string input)
     {
