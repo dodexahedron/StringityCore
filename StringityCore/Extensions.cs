@@ -15,6 +15,7 @@ public static partial class Extensions
     /// <param name="input">The string for which <see cref="char"/> elements are to be counted.</param>
     /// <returns>Total count of <see cref="char"/> elements in the <paramref name="input"/> <see cref="string"/>.</returns>
     /// <remarks>Total char count may not be equal to number of text elements.</remarks>
+    /// <remarks>This method is identical to using <see cref="String.Length">string.Length</see>.</remarks>
     [MethodImpl (MethodImplOptions.AggressiveInlining)]
     public static int CountCharacters (this string input) => input.Length;
 
