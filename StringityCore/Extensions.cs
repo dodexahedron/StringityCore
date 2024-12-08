@@ -15,7 +15,7 @@ public static class Extensions
     /// <param name="input">The string for which <see cref="char"/> elements are to be counted.</param>
     /// <returns>Total count of <see cref="char"/> elements in the <paramref name="input"/> <see cref="string"/>.</returns>
     /// <remarks>Total char count may not be equal to number of text elements.</remarks>
-    public static string CountCharacters (this string input) => input.Length.ToString ();
+    public static int CountCharacters (this string input) => input.Length;
 
     /// <summary>
     ///     Gets the total count of <see cref="char"/> elements in the <paramref name="input"/> <see cref="string"/> that are in the
@@ -30,9 +30,9 @@ public static class Extensions
     ///     Surrogate pairs, as well as vowels in non-English languages or letters which are functionally vowels in any language,
     ///     including English, are not considered.
     /// </remarks>
-    public static string CountConsonants (this string input)
+    public static int CountConsonants (this string input)
     {
-        return input.Count (static c => char.IsLetter (c) && !"aeiouAEIOU".Contains (c)).ToString ();
+        return input.Count (static c => char.IsLetter (c) && !"aeiouAEIOU".Contains (c));
     }
 
     /// <summary>
@@ -45,7 +45,7 @@ public static class Extensions
     ///     as stated.
     /// </returns>
     /// <remarks>Surrogate pairs are not considered.</remarks>
-    public static string CountDigits (this string input) => input.Count (char.IsDigit).ToString ();
+    public static int CountDigits (this string input) => input.Count (char.IsDigit);
 
     /// <summary>
     ///     Gets the total count of <see cref="char"/> elements in the <paramref name="input"/> <see cref="string"/> that are classified
@@ -57,7 +57,7 @@ public static class Extensions
     ///     as stated.
     /// </returns>
     /// <remarks>Surrogate pairs are not considered.</remarks>
-    public static string CountLowercase (this string input) => input.Count (char.IsLower).ToString ();
+    public static int CountLowercase (this string input) => input.Count (char.IsLower);
 
     // Count Number of Paragraphs (Assuming double newline is a paragraph separator)
     public static string CountParagraphs (this string input) =>
@@ -67,21 +67,21 @@ public static class Extensions
     public static string CountPunctuation (this string input) => input.Count (char.IsPunctuation).ToString ();
 
     // Count Number of Sentences (Assuming periods, exclamation marks, or question marks indicate a sentence)
-    public static string CountSentences (this string input) =>
-        input.Split (['.', '!', '?'], StringSplitOptions.RemoveEmptyEntries).Length.ToString ();
+    public static int CountSentences (this string input) =>
+        input.Split (['.', '!', '?'], StringSplitOptions.RemoveEmptyEntries).Length;
 
     // Count Number of Uppercase Characters
-    public static string CountUppercase (this string input) => input.Count (char.IsUpper).ToString ();
+    public static int CountUppercase (this string input) => input.Count (char.IsUpper);
 
     // Count Number of Vowels
-    public static string CountVowels (this string input) { return input.Count (static c => "aeiouAEIOU".Contains (c)).ToString (); }
+    public static int CountVowels (this string input) { return input.Count (static c => "aeiouAEIOU".Contains (c)); }
 
     // Count Number of Whitespace Characters
-    public static string CountWhitespace (this string input) => input.Count (char.IsWhiteSpace).ToString ();
+    public static int CountWhitespace (this string input) => input.Count (char.IsWhiteSpace);
 
     // Count Number of Words
-    public static string CountWords (this string input) =>
-        input.Split ([' ', '\t', '\n', '\r'], StringSplitOptions.RemoveEmptyEntries).Length.ToString ();
+    public static int CountWords (this string input) =>
+        input.Split ([' ', '\t', '\n', '\r'], StringSplitOptions.RemoveEmptyEntries).Length;
 
     public static string FromBinary (this string input)
     {
@@ -110,9 +110,6 @@ public static class Extensions
     {
         return string.Concat (input.Split (' ').Where (static m => _morseDecode.ContainsKey (m)).Select (static m => _morseDecode [m]));
     }
-
-    // Get String Length
-    public static string GetLength (this string input) => input.CountCharacters ();
 
     // Find Least Frequent Character
     public static string LeastFrequentCharacter (this string input)
