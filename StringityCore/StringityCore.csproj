@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
@@ -11,7 +11,9 @@
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
     <AnalysisLevel>latest-recommended</AnalysisLevel>
-    <WarningLevel>8</WarningLevel>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>13</LangVersion>
+    <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
   
   <ItemGroup>
@@ -48,6 +50,8 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DefineDebug>True</DefineDebug>
     <VersionSuffix>$(VersionSuffix)Debug</VersionSuffix>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
   </PropertyGroup>
 
   <!-- NuGet Package Assets -->
