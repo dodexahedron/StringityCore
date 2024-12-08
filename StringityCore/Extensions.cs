@@ -18,6 +18,19 @@ public static class Extensions
     public static int CountCharacters (this string input) => input.Length;
 
     /// <summary>
+    ///     Gets the total count of <see cref="char"/> elements in the <paramref name="input"/> <see cref="ReadOnlySpan{T}"/> of
+    ///     <see cref="char"/>.
+    /// </summary>
+    /// <param name="input">
+    ///     The <see cref="ReadOnlySpan{T}"/> of <see cref="char"/> for which <see cref="char"/> elements are to be
+    ///     counted.
+    /// </param>
+    /// <returns>Total count of <see cref="char"/> elements in <paramref name="input"/>.</returns>
+    /// <remarks>Total char count may not be equal to number of text elements.</remarks>
+    /// <remarks>This method is identical to using <see cref="ReadOnlySpan{T}.Length">ReadOnlySpan&lt;char&gt;.Length</see>.</remarks>
+    public static int CountCharacters (this ReadOnlySpan<char> input) => input.Length;
+
+    /// <summary>
     ///     Gets the total count of <see cref="char"/> elements in the <paramref name="input"/> <see cref="string"/> that are in the
     ///     range equivalent to the regular expression [^aeiouAUIOU].
     /// </summary>
