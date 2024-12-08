@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 ///     Class containing all extension methods defined by the library.
 /// </summary>
 [UsedImplicitly (ImplicitUseTargetFlags.Itself)]
-public static class Extensions
+public static partial class Extensions
 {
     /// <summary>
     ///     Gets the total count of <see cref="char"/> elements in the <paramref name="input"/> <see cref="string"/>.
@@ -69,15 +69,57 @@ public static class Extensions
     ///     Total count of <see cref="char"/> elements in the <paramref name="input"/> <see cref="string"/> that match the inclusion rule
     ///     as stated.
     /// </returns>
-    /// <remarks>Surrogate pairs are not considered.</remarks>
+    /// <remarks>Surrogate pairs are not considered. All characters must be within the Unicode Basic Multilingual Plane.</remarks>
     public static int CountLowercase (this string input) => input.Count (char.IsLower);
 
-    // Count Number of Paragraphs (Assuming double newline is a paragraph separator)
-    public static string CountParagraphs (this string input) =>
-        input.Split (["\n\n", "\r\n\r\n"], StringSplitOptions.RemoveEmptyEntries).Length.ToString ();
+    /// <summary>
+    ///     Gets the total count of paragraphs.<br/>
+    ///     A paragraph is counted for every match of this regular expression:
+    ///     <code>
+    ///  ((\r\n|\r|\n){2,}|\p{Zp}+|\A)^\s*\S
+    /// </code>
+    ///     This counts all instances of non-whitespace characters following any instances of the following:<br/>
+    ///     - The start of the string<br/>
+    ///     - Sequences of two or more pairs of carriage return+line feed characters (\u000d\000a)<br/>
+    ///     - Sequences of two or more carriage return characters (\u000d)<br/>
+    ///     - Sequences of two or more line feed characters (\u000a)<br/>
+    ///     - One or more characters that are classified as Unicode Paragraph Separators, excluding the above sequences.<br/>
+    ///     Any other whitespace preceding the first non-whitespace character is also ignored and will not affect the count.
+    /// </summary>
+    /// <param name="input">The string for which paragraphs are to be counted according to the delimiter rules as stated.</param>
+    /// <returns>
+    ///     Total count of paragraphs according to the delimiter rules as stated.
+    /// </returns>
+    /// <remarks>
+    ///     Single occurrences of carriage return, carriage return+line feed, or line feed are not counted as paragraphs by this method.
+    ///     <para>
+    ///         See <see href="https://regex101.com/r/uzXE6x">https://regex101.com/r/uzXE6x</see> for detailed explanation and behavior
+    ///         demonstration.
+    ///     </para>
+    /// </remarks>
+    public static int CountParagraphs (this ReadOnlySpan<char> input)
+    {
+        if (input.IsEmpty || input.IsWhiteSpace ())
+        {
+            return 0;
+        }
 
-    // Count Number of Punctuation Marks
-    public static string CountPunctuation (this string input) => input.Count (char.IsPunctuation).ToString ();
+        return ParagraphDelimitersRegex ().Count (input);
+    }
+
+    /// <inheritdoc cref="CountParagraphs(System.ReadOnlySpan{char})"/>
+    public static int CountParagraphs (this string input) => CountParagraphs (input.AsSpan ());
+
+    /// <summary>
+    ///     Gets the total number of char instances in <paramref name="input"/> which are in the Unicode Punctuation class.
+    /// </summary>
+    /// <param name="input">The text for which punctuation is to be counted.</param>
+    /// <returns>The total count of punctuation characters.</returns>
+    /// <remarks>
+    ///     Surrogate pairs are not considered. All characters must be in the Unicode Basic Multilingual Plane.<br/>
+    ///     Pairs of opening and closing punctuation marks are counted as their individual marks - not as pairs.
+    /// </remarks>
+    public static int CountPunctuation (this string input) => input.Count (char.IsPunctuation);
 
     // Count Number of Sentences (Assuming periods, exclamation marks, or question marks indicate a sentence)
     public static int CountSentences (this string input) =>
@@ -522,6 +564,15 @@ public static class Extensions
                     .Replace ("<",  "&lt;")
                     .Replace (">",  "&gt;");
     }
+
+    /// <summary>
+    ///     Regex that defines what is considered a paragraph separator.
+    /// </summary>
+    [GeneratedRegex (
+                        "((\\r\\n|\\r|\\n|\\p{Zp}+){2,}|\\A)^\\s*\b\\S",
+                        RegexOptions.CultureInvariant | RegexOptions.NonBacktracking | RegexOptions.Multiline
+                    )]
+    internal static partial Regex ParagraphDelimitersRegex ();
 
     private static char Rot13Char (char input)
     {
